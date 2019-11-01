@@ -1,0 +1,10 @@
+<StyleCopSettings Version="105">
+  <GlobalSettings>
+    <CollectionProperty Name="RecognizedWords">
+      <Value>awaitable</Value>
+      <Value>co-ordainate</Value>
+      <Value>initialise</Value>
+      <Value>initialised</Value>
+    </CollectionProperty>
+  </GlobalSettings>
+</StyleCopSettings>

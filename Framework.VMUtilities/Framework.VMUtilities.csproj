@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Vssl.Samples.Framework</RootNamespace>
+    <AssemblyName>Vssl.Samples.Framework.VMUtilities</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Helpers\Framework.Helpers.csproj" />
+    <ProjectReference Include="..\FrameworkInterfaces\FrameworkInterfaces.csproj" />
+  </ItemGroup>
+
+</Project>
