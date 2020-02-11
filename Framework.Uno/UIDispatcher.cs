@@ -5,11 +5,11 @@ namespace Vssl.Samples.Framework
     using System;
     using System.Collections.Generic;
     using System.Text;
-    using System.Threading.Tasks;
-    using Windows.UI.Core;
-    using Vssl.Samples.FrameworkInterfaces;
-    using Windows.UI.Xaml;
     using System.Threading;
+    using System.Threading.Tasks;
+    using Vssl.Samples.FrameworkInterfaces;
+    using Windows.UI.Core;
+    using Windows.UI.Xaml;
 
     /// <summary>
     /// A UWP platform specific implementation of the UI Dispatcher facade

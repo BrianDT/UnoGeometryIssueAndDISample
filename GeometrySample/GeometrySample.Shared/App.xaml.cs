@@ -42,7 +42,7 @@ namespace GeometrySample
         /// </summary>
         public App()
         {
-            ConfigureFilters(Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory);
+            ConfigureFilters(global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory);
 
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
@@ -146,7 +146,7 @@ namespace GeometrySample
         /// <param name="e">Details about the navigation failure</param>
         private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+            throw new Exception($"Failed to load {e.SourcePageType.FullName}: {e.Exception}");
         }
 
         /// <summary>
