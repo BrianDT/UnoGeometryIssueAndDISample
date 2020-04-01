@@ -50,6 +50,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		GeometrySample\GeometrySample.Shared\GeometrySample.Shared.projitems*{23e468eb-b449-4617-93e1-84654d0b1b77}*SharedItemsImports = 4
 		GeometrySample\GeometrySample.Shared\GeometrySample.Shared.projitems*{4495df87-1609-44bd-ac63-8cfc018be9b8}*SharedItemsImports = 4
+		GeometrySample\GeometrySample.Shared\GeometrySample.Shared.projitems*{5cdbd662-9da0-429b-9e84-4a3142393eac}*SharedItemsImports = 5
 		GeometrySample\GeometrySample.Shared\GeometrySample.Shared.projitems*{5d88cd36-ef28-49b8-80e8-e83165ee2ca2}*SharedItemsImports = 4
 		GeometrySample\GeometrySample.Shared\GeometrySample.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
 	EndGlobalSection
