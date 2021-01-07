@@ -15,6 +15,7 @@ namespace Vssl.Samples.Framework
         #endregion
 
         #region [ Public static properties ]
+
         /// <summary>
         /// Gets or sets the container service container
         /// </summary>
@@ -33,7 +34,8 @@ namespace Vssl.Samples.Framework
         /// </summary>
         /// <typeparam name="T">The type to be resolved</typeparam>
         /// <returns>The instance of T</returns>
-        public static T Resolve<T>() where T : class
+        public static T Resolve<T>()
+            where T : class
         {
             return DependencyHelper.Container.Resolve<T>();
         }

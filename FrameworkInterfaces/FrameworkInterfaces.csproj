@@ -6,4 +6,20 @@
     <AssemblyName>Vssl.Samples.FrameworkInterfaces</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="StyleCop.Cache" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\VSSL.ruleset" Link="VSSL.ruleset" />
+    <AdditionalFiles Include="StyleCop.Cache" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
 </Project>
