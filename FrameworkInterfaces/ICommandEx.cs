@@ -9,19 +9,19 @@ namespace Vssl.Samples.FrameworkInterfaces
     using System.Windows.Input;
 
     /// <summary>
-    /// An extended ICommand interface that allows async execution
+    /// An extended ICommand interface that allows async execution.
     /// </summary>
     public interface ICommandEx : ICommand
     {
         /// <summary>
-        /// Executes the command action asynchronously
+        /// Executes the command action asynchronously.
         /// </summary>
-        /// <param name="parameter">The optional command parameter</param>
-        /// <returns>The task that can be awaited</returns>
+        /// <param name="parameter">The optional command parameter.</param>
+        /// <returns>The task that can be awaited.</returns>
         Task ExecuteAsync(object parameter);
 
         /// <summary>
-        /// Forces the raising of the CanExecute Changed event
+        /// Forces the raising of the CanExecute Changed event.
         /// </summary>
         void RaiseCanExecuteChanged();
     }

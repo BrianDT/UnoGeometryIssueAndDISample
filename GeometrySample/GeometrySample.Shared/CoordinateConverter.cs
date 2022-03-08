@@ -7,7 +7,11 @@ namespace GeometrySample.Shared
     using System.Text;
     using Vssl.Samples.ViewModelInterfaces;
     using Windows.Foundation;
+#if WINDOWS_UWP
     using Windows.UI.Xaml.Data;
+#else
+    using Microsoft.UI.Xaml.Data;
+#endif
 
     /// <summary>
     /// Converts from portable co-ordinates to Framework points

@@ -9,7 +9,11 @@ namespace Vssl.Samples.Framework
     using System.Threading.Tasks;
     using Vssl.Samples.FrameworkInterfaces;
     using Windows.UI.Core;
+#if WINDOWS_UWP
     using Windows.UI.Xaml;
+#else
+    using Microsoft.UI.Xaml;
+#endif
 
     /// <summary>
     /// A UWP platform specific implementation of the UI Dispatcher facade
@@ -101,7 +105,7 @@ namespace Vssl.Samples.Framework
         {
             if (delayms > 0)
             {
-                await Task.Delay(delayms).ConfigureAwait(dispatcher.HasThreadAccess);
+                await Task.Delay(delayms).ConfigureAwait(this.dispatcher.HasThreadAccess);
             }
 
             if (this.dispatcher == null || (this.dispatcher.HasThreadAccess && priority == CoreDispatcherPriority.Normal))
@@ -112,7 +116,7 @@ namespace Vssl.Samples.Framework
             {
                 var tcs = new TaskCompletionSource<object>();
 
-                await dispatcher.RunAsync(priority, () =>
+                await this.dispatcher.RunAsync(priority, () =>
                 {
                     try
                     {

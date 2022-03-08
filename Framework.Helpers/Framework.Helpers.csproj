@@ -4,16 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Vssl.Samples.Framework</RootNamespace>
     <AssemblyName>Vssl.Samples.Framework.Helpers</AssemblyName>
+	  <CodeAnalysisRuleSet>..\Vssl.ruleset</CodeAnalysisRuleSet>
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="StyleCop.Cache" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AdditionalFiles Include="..\VSSL.ruleset" Link="VSSL.ruleset" />
-    <AdditionalFiles Include="StyleCop.Cache" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">

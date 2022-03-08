@@ -22,5 +22,6 @@
 </TargetiOSDevice>
     <DeveloperId>brian%40vsoftsys.co.uk</DeveloperId>
     <DevelopmentTeamId>HK5X7C77MR</DevelopmentTeamId>
+    <SelectedPlatformGroup>RemoteDevice</SelectedPlatformGroup>
   </PropertyGroup>
 </Project>

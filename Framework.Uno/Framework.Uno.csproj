@@ -1,19 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
+<Project Sdk="MSBuild.Sdk.Extras/3.0.38">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;xamarinios10;monoandroid10.0;uap10.0.17763</TargetFrameworks>
-    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
-    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <TargetFrameworks>netstandard2.0;net6.0-windows10.0.19041.0;MonoAndroid11.0;xamarinios10;uap10.0.19041</TargetFrameworks>
     <RootNamespace>Vssl.Samples.Framework</RootNamespace>
     <AssemblyName>Vssl.Samples.Framework.Uno</AssemblyName>
+	  <CodeAnalysisRuleSet>..\Vssl.ruleset</CodeAnalysisRuleSet>
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+	<PropertyGroup Condition="'$(TargetFramework)'=='uap10.0.19041'">
+		<!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+		<GenerateLibraryLayout>true</GenerateLibraryLayout>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)'=='net6.0-windows10.0.19041.0'">
+		<RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+		<UseWinUI>true</UseWinUI>
+		<DefineConstants>$(DefineConstants);NET6_0</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
     <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
   </PropertyGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid10.0' or '$(TargetFramework)'=='netstandard2.0'">
-    <PackageReference Include="Uno.UI" Version="3.4.0" />
+	<PropertyGroup Condition="'$(TargetFramework)'!='uap10.0.19041' and '$(TargetFramework)'!='net6.0-windows10.0.19041.0'">
+		<DefineConstants>$(DefineConstants);HAS_UNO</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.19041' and '$(TargetFramework)'!='net6.0-windows10.0.19041.0'">
+    <PackageReference Include="Uno.WinUI" Version="4.0.13" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'!='net6.0-windows10.0.19041.0'">
     <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
     <Compile Update="**\*.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
@@ -25,4 +38,14 @@
   <ItemGroup>
     <ProjectReference Include="..\FrameworkInterfaces\FrameworkInterfaces.csproj" />
   </ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)'=='net6.0-windows10.0.19041.0'">
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.196" />
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
 </Project>

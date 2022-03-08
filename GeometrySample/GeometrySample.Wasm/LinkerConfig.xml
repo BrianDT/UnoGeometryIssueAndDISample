@@ -1,10 +1,11 @@
 ﻿<linker>
   <assembly fullname="GeometrySample.Wasm" />
-  <assembly fullname="Uno.UI" />
-  <assembly fullname="Uno.UI.RemoteControl" />
+  <assembly fullname="Uno.WinUI" />
+  <assembly fullname="Uno.WinUI.RemoteControl" />
   <assembly fullname="Unity.Abstractions" />
   <assembly fullname="Unity.Container" />
-  <assembly fullname="CommonServiceLocator" />
+	<assembly fullname="Uno.Core" />
+	<assembly fullname="CommonServiceLocator" />
   <assembly fullname="Microsoft.Extensions.Configuration.Abstractions" />
   <assembly fullname="Microsoft.Extensions.DependencyInjection.Abstractions" />
   <assembly fullname="Microsoft.Extensions.Logging.Abstractions" />
