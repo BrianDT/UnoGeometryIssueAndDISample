@@ -16,7 +16,7 @@ namespace GeometrySample.Shared
 #if __IOS__
     using Framework.TinyDIFacade;
 #endif
-#if __WASM__ || NETFX_CORE
+#if __WASM__ || WINDOWS_UWP || NET6_0
     using Unity;
     using Unity.Lifetime;
     using UnityDIFacade;
@@ -60,7 +60,7 @@ namespace GeometrySample.Shared
             var container = new Container(registry);
 
             diFacade.Initialise(container);
-#elif __WASM__ || NETFX_CORE
+#elif __WASM__ || WINDOWS_UWP || NET6_0
             IUnityContainer container = new UnityContainer();
             container.RegisterInstance<IUnityContainer>(container, new ContainerControlledLifetimeManager());
             container.RegisterType<IDependencyResolver, UnityDI>(new ContainerControlledLifetimeManager());

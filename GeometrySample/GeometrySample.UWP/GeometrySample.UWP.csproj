@@ -118,6 +118,10 @@
       <Project>{31425516-1131-49de-9b6d-2979ab7a44d8}</Project>
       <Name>Framework.Helpers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Framework.Uno\Framework.Uno.csproj">
+      <Project>{c2306c90-2667-4f81-bfd0-e4e932b0246e}</Project>
+      <Name>Framework.Uno</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\FrameworkInterfaces\FrameworkInterfaces.csproj">
       <Project>{75e80166-9ef0-42ad-85e7-b4ce9cf97b9e}</Project>
       <Name>FrameworkInterfaces</Name>
