@@ -1,2 +1,0 @@
-MainPackage=D:\Development\GitHub.VSSL\TheBlueDuck\Tests\ButtonTest\ButtonTest.WinUI (Package)\bin\x86\Release\ButtonTest.WinUI (Package)_1.0.1.0_x86.msix
-SymbolPackage=D:\Development\GitHub.VSSL\TheBlueDuck\Tests\ButtonTest\ButtonTest.WinUI (Package)\obj\x86\Release\Symbols\ButtonTest.WinUI (Package)_1.0.1.0_x86.appxsym

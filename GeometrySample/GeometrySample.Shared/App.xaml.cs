@@ -57,7 +57,7 @@ namespace GeometrySample
             InitializeLogging();
 
             this.InitializeComponent();
-#if HAS_UNO || NETFX_CORE
+#if HAS_UNO || WINDOWS_UWP
             this.Suspending += OnSuspending;
 #endif
         }
@@ -142,7 +142,7 @@ namespace GeometrySample
                 builder.AddProvider(new global::Uno.Extensions.Logging.WebAssembly.WebAssemblyConsoleLoggerProvider());
 #elif __IOS__
                 builder.AddProvider(new global::Uno.Extensions.Logging.OSLogLoggerProvider());
-#elif NETFX_CORE
+#elif WINDOWS_UWP || NET6_0
                 builder.AddDebug();
 #else
                 builder.AddConsole();

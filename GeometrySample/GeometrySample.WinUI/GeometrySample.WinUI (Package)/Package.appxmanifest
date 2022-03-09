@@ -7,9 +7,9 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="315a0738-afa2-42d5-a39a-68f72efd6c11"
-    Publisher="CN=Visyal Software Systems Ltd."
-    Version="1.0.1.0" />
+    Name="5ae3d110-bfce-4040-b45e-9c88e1a67cd4"
+    Publisher="CN=vsoft"
+    Version="1.0.0.0" />
 
   <Properties>
     <DisplayName>GeometrySample.WinUI (Package)</DisplayName>
