@@ -11,7 +11,7 @@ namespace Vssl.Samples.Framework
     using Windows.UI.Core;
 #if WINDOWS_UWP
     using Windows.UI.Xaml;
-#else
+#elif !NET6_0 && !NETSTANDARD2_0
     using Microsoft.UI.Xaml;
 #endif
 
@@ -20,10 +20,14 @@ namespace Vssl.Samples.Framework
     /// </summary>
     public class UIDispatcher : IDispatchOnUIThread
     {
+#if !NET6_0 && !NETSTANDARD2_0
         /// <summary>
         /// The UWP platform dispatcher
         /// </summary>
         private CoreDispatcher dispatcher;
+#else
+        private SynchronizationContext dispatcher;
+#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UIDispatcher"/> class.
@@ -37,10 +41,14 @@ namespace Vssl.Samples.Framework
         /// </summary>
         public void Initialize()
         {
+#if !NET6_0 && !NETSTANDARD2_0
             if (Window.Current != null)
             {
                 this.dispatcher = Window.Current.Dispatcher;
             }
+#else
+            this.dispatcher = SynchronizationContext.Current;
+#endif
         }
 
         /// <summary>
@@ -73,6 +81,7 @@ namespace Vssl.Samples.Framework
             await this.ExecuteAsync(action);
         }
 
+#if !NET6_0 && !NETSTANDARD2_0
         /// <summary>
         /// Execute an action via the dispatcher
         /// </summary>
@@ -131,5 +140,43 @@ namespace Vssl.Samples.Framework
                 await tcs.Task.ConfigureAwait(false);
             }
         }
+#else
+        /// <summary>
+        /// Execute an action via the dispatcher
+        /// </summary>
+        /// <param name="action">The action</param>
+        public void Execute(Action action)
+        {
+            var tcs = new TaskCompletionSource<object>();
+            if (this.dispatcher == null)
+            {
+                action();
+            }
+            else
+            {
+                // Not awated execution will continue before the action has completed
+                this.dispatcher.Post((object state) => action(), null);
+            }
+        }
+
+        /// <summary>
+        /// Execute a function via the dispatcher
+        /// </summary>
+        /// <param name="action">The action</param>
+        /// <returns>An awaitable task</returns>
+        public async Task ExecuteAsync(Action action)
+        {
+            if (this.dispatcher == null)
+            {
+                action();
+            }
+            else
+            {
+                this.dispatcher.Send((object state) => action(), null);
+            }
+
+            await Task.CompletedTask;
+        }
+#endif
     }
 }

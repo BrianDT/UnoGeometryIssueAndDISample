@@ -49,6 +49,7 @@ namespace GeometrySample
             };
             this.Loaded += (s, e) =>
             {
+                this.dispatcher.CheckDispatcher();
                 this.VM.OnViewLoaded();
             };
         }
