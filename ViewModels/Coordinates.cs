@@ -5,7 +5,7 @@ namespace Vssl.Samples.ViewModels
     using System;
     using System.Collections.Generic;
     using System.Text;
-    using ViewModelInterfaces;
+    using Vssl.Samples.ViewModelInterfaces;
 
     /// <summary>
     /// A portable co-ordinate class

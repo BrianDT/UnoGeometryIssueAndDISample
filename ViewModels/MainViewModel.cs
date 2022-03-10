@@ -8,10 +8,9 @@ namespace Vssl.Samples.ViewModels
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using FrameworkInterfaces;
-    using ViewModelInterfaces;
     using Vssl.Samples.Framework;
-    using Vssl.Samples.ViewModels;
+    using Vssl.Samples.FrameworkInterfaces;
+    using Vssl.Samples.ViewModelInterfaces;
 
     /// <summary>
     /// The view model for the geometry sample
@@ -63,7 +62,8 @@ namespace Vssl.Samples.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel" /> class.
         /// </summary>
-        public MainViewModel() : base()
+        public MainViewModel()
+            : base()
         {
             this.StartCommand = new DelegateCommandAsync(this.StartAnnimating, (p) => true);
             this.StopCommand = new DelegateCommandAsync(this.StopAnnimating, (p) => true);
@@ -242,7 +242,9 @@ namespace Vssl.Samples.ViewModels
         /// <summary>
         /// Start animating the location of the rectangle
         /// </summary>
-        public async Task StartAnnimating(object parameter)
+        /// <param name="parameter">An optional parameter</param>
+        /// <returns>An awaitable task</returns>
+        private async Task StartAnnimating(object parameter)
         {
             this.annimating = true;
             Task.Run(async () =>
@@ -256,7 +258,9 @@ namespace Vssl.Samples.ViewModels
         /// <summary>
         /// Stop animating the location of the rectangle
         /// </summary>
-        public async Task StopAnnimating(object parameter)
+        /// <param name="parameter">An optional parameter</param>
+        /// <returns>An awaitable task</returns>
+        private async Task StopAnnimating(object parameter)
         {
             this.annimating = false;
             await Task.CompletedTask;

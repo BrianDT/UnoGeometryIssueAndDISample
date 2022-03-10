@@ -4,7 +4,16 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Vssl.Samples.ViewModelInterfaces</RootNamespace>
     <AssemblyName>Vssl.Samples.ViewModelInterfaces</AssemblyName>
+	  <CodeAnalysisRuleSet>..\Vssl.ruleset</CodeAnalysisRuleSet>
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FrameworkInterfaces\FrameworkInterfaces.csproj" />

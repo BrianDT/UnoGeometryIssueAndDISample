@@ -7,9 +7,9 @@ namespace Vssl.Samples.ViewModels
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Text;
-    using FrameworkInterfaces;
-    using ViewModelInterfaces;
     using Vssl.Samples.Framework;
+    using Vssl.Samples.FrameworkInterfaces;
+    using Vssl.Samples.ViewModelInterfaces;
 
     /// <summary>
     /// A base class for all view models
