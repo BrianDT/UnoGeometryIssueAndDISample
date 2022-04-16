@@ -40,20 +40,20 @@
   <ItemGroup>
 	  <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.0" />
 	  <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-	  <PackageReference Include="Unity" Version="5.11.10" />
+	  <PackageReference Include="SimpleInjector" Version="5.3.3" />
 	  <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.1.0" />
-	  <PackageReference Include="Uno.WinUI.WebAssembly" Version="4.1.8" />
-	  <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.1.8" Condition="'$(Configuration)'=='Debug'" />
-	  <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.1.8" />
-	  <PackageReference Include="Uno.Wasm.Bootstrap" Version="3.2.0" />
-	  <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.2.0" PrivateAssets="all" />
+	  <PackageReference Include="Uno.WinUI.WebAssembly" Version="4.1.9" />
+	  <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.1.9" Condition="'$(Configuration)'=='Debug'" />
+	  <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.1.9" />
+	  <PackageReference Include="Uno.Wasm.Bootstrap" Version="3.3.1" />
+	  <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" PrivateAssets="all" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Helpers\Framework.Helpers.csproj" />
     <ProjectReference Include="..\..\Framework.Uno\Framework.Uno.csproj" />
     <ProjectReference Include="..\..\Framework.VMUtilities\Framework.VMUtilities.csproj" />
     <ProjectReference Include="..\..\FrameworkInterfaces\FrameworkInterfaces.csproj" />
-    <ProjectReference Include="..\..\UnityDIFacade\UnityDIFacade.csproj" />
+    <ProjectReference Include="..\..\SimInjDIFacade\SimInjDIFacade.csproj" />
     <ProjectReference Include="..\..\ViewModelInterfaces\ViewModelInterfaces.csproj" />
     <ProjectReference Include="..\..\ViewModels\ViewModels.csproj" />
   </ItemGroup>

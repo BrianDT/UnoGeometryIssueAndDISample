@@ -16,10 +16,17 @@ namespace GeometrySample.Shared
 #if __IOS__
     using Framework.TinyDIFacade;
 #endif
-#if __WASM__ || WINDOWS_UWP || NET6_0
+#if __WASM__
+    using SimpleInjector;
+    using SimInjDIFacade;
+#elif WINDOWS_UWP
     using Unity;
     using Unity.Lifetime;
     using UnityDIFacade;
+#elif NET6_0
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using MSExtFacade;
 #endif
 
     using Vssl.Samples.Framework;
@@ -60,7 +67,20 @@ namespace GeometrySample.Shared
             var container = new Container(registry);
 
             diFacade.Initialise(container);
-#elif __WASM__ || WINDOWS_UWP || NET6_0
+#elif __WASM__
+            // Create a new Simple Injector container
+            var container = new Container();
+
+            // Configure the container (register)
+            container.Register<IDependencyResolver>(() => new SimpInjDI(container), Lifestyle.Singleton);
+            container.Register<IDispatchOnUIThread, UIDispatcher>(Lifestyle.Singleton);
+            container.Register<IMainViewModel, MainViewModel>();
+
+            // Verify your configuration
+            container.Verify();
+
+            var diFacade = container.GetInstance<IDependencyResolver>();
+#elif WINDOWS_UWP 
             IUnityContainer container = new UnityContainer();
             container.RegisterInstance<IUnityContainer>(container, new ContainerControlledLifetimeManager());
             container.RegisterType<IDependencyResolver, UnityDI>(new ContainerControlledLifetimeManager());
@@ -72,6 +92,15 @@ namespace GeometrySample.Shared
             container.RegisterType<IMainViewModel, MainViewModel>();
 
             var diFacade = container.Resolve<IDependencyResolver>();
+#elif NET6_0
+            var services = new ServiceCollection();
+            services.AddSingleton<IDependencyResolver, MSExtDI>()
+                    .AddSingleton<IDispatchOnUIThread, UIDispatcher>()
+                    .AddTransient<IMainViewModel, MainViewModel>();
+
+            var serviceProvider = services.BuildServiceProvider();
+            var diFacade = serviceProvider.GetRequiredService<IDependencyResolver>();
+            ((MSExtDI)diFacade).Configure(serviceProvider);
 #elif __IOS__
             var container = new TinyIoCDependencyService();
             // DI Facade
