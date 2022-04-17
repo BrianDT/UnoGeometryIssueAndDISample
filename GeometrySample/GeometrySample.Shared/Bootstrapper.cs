@@ -8,25 +8,25 @@ namespace GeometrySample.Shared
 #if __DROID__
     using Lamar;
     using LamarDiFacade;
-#endif
-#if __WPF__
+#elif __WPF__
     using Framework.SMDIFacade;
     using StructureMap;
-#endif
-#if __IOS__
+#elif __IOS__
     using Framework.TinyDIFacade;
-#endif
-#if __WASM__
+#elif __WASM__
     using SimpleInjector;
     using SimInjDIFacade;
 #elif WINDOWS_UWP
-    using Unity;
-    using Unity.Lifetime;
-    using UnityDIFacade;
+    using DryIoc;
+    using DryIocDIFacade;
 #elif NET6_0
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using MSExtFacade;
+#else
+    using Unity;
+    using Unity.Lifetime;
+    using UnityDIFacade;
 #endif
 
     using Vssl.Samples.Framework;
@@ -81,15 +81,14 @@ namespace GeometrySample.Shared
 
             var diFacade = container.GetInstance<IDependencyResolver>();
 #elif WINDOWS_UWP 
-            IUnityContainer container = new UnityContainer();
-            container.RegisterInstance<IUnityContainer>(container, new ContainerControlledLifetimeManager());
-            container.RegisterType<IDependencyResolver, UnityDI>(new ContainerControlledLifetimeManager());
+            var container = new Container();
+            container.RegisterInstance<IDependencyResolver>(new DryIocDI(container));
 
             // Framework
-            container.RegisterType<IDispatchOnUIThread, UIDispatcher>(new ContainerControlledLifetimeManager());
+            container.Register<IDispatchOnUIThread, UIDispatcher>(Reuse.Singleton);
 
             // View models
-            container.RegisterType<IMainViewModel, MainViewModel>();
+            container.Register<IMainViewModel, MainViewModel>();
 
             var diFacade = container.Resolve<IDependencyResolver>();
 #elif NET6_0
@@ -128,6 +127,18 @@ namespace GeometrySample.Shared
             });
 
             var diFacade = container.GetInstance<IDependencyResolver>();
+#else
+            IUnityContainer container = new UnityContainer();
+            container.RegisterInstance<IUnityContainer>(container, new ContainerControlledLifetimeManager());
+            container.RegisterType<IDependencyResolver, UnityDI>(new ContainerControlledLifetimeManager());
+
+            // Framework
+            container.RegisterType<IDispatchOnUIThread, UIDispatcher>(new ContainerControlledLifetimeManager());
+
+            // View models
+            container.RegisterType<IMainViewModel, MainViewModel>();
+
+            var diFacade = container.Resolve<IDependencyResolver>();
 
 #endif
             DependencyHelper.Container = diFacade;
