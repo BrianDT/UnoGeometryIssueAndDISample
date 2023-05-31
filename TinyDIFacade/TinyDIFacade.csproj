@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Framework.TinyDIFacade</RootNamespace>
     <AssemblyName>Framework.TinyDIFacade</AssemblyName>
+	  <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

@@ -247,7 +247,7 @@ namespace Vssl.Samples.ViewModels
         private async Task StartAnnimating(object parameter)
         {
             this.annimating = true;
-            Task.Run(async () =>
+            var task = Task.Run(async () =>
             {
                 await this.AnnimateAsync();
             });

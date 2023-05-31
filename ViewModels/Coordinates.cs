@@ -92,6 +92,15 @@ namespace Vssl.Samples.ViewModels
         }
 
         /// <summary>
+        /// Gets the default hashcode.
+        /// </summary>
+        /// <returns>The hashcode for the type.</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        /// <summary>
         /// Checks for equality with another instance
         /// </summary>
         /// <param name="obj">An object to compare</param>
@@ -108,11 +117,6 @@ namespace Vssl.Samples.ViewModels
             if (other == null)
             {
                 return false;
-            }
-
-            if (object.ReferenceEquals(this, other))
-            {
-                return true;
             }
 
             if (this.X == other.X && this.Y == other.Y)
@@ -134,11 +138,6 @@ namespace Vssl.Samples.ViewModels
             if (other == null)
             {
                 return false;
-            }
-
-            if (object.ReferenceEquals(this, other))
-            {
-                return true;
             }
 
             if (this.X == other.X && this.Y == other.Y)

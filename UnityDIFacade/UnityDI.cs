@@ -44,7 +44,8 @@ namespace UnityDIFacade
         /// </summary>
         /// <typeparam name="InterfaceType">The registered interface type</typeparam>
         /// <returns>The mapped type</returns>
-        public InterfaceType Resolve<InterfaceType>() where InterfaceType : class
+        public InterfaceType Resolve<InterfaceType>()
+            where InterfaceType : class
         {
             return this.container.Resolve<InterfaceType>();
         }
@@ -64,7 +65,9 @@ namespace UnityDIFacade
         /// </summary>
         /// <typeparam name="T">The type of the interface</typeparam>
         /// <typeparam name="U">The type of the class</typeparam>
-        public void Register<T, U>() where T : class where U : class, T
+        public void Register<T, U>()
+            where T : class
+            where U : class, T
         {
             this.container.RegisterType<T, U>();
         }
@@ -74,7 +77,9 @@ namespace UnityDIFacade
         /// </summary>
         /// <typeparam name="T">The type of the interface</typeparam>
         /// <typeparam name="U">The type of the class</typeparam>
-        public void RegisterSingleton<T, U>() where T : class where U : class, T
+        public void RegisterSingleton<T, U>()
+            where T : class
+            where U : class, T
         {
             this.container.RegisterType<T, U>(new ContainerControlledLifetimeManager());
         }

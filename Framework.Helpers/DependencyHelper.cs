@@ -3,7 +3,7 @@
 namespace Vssl.Samples.Framework
 {
     using System;
-    using FrameworkInterfaces;
+    using Vssl.Samples.FrameworkInterfaces;
 
     /// <summary>
     /// The dependency injection helper holding holds a static copy of the interface to the dependency resolver facade

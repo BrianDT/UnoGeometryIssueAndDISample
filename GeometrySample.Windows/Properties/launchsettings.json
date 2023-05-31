@@ -1,0 +1,10 @@
+{
+  "profiles": {
+	"GeometrySample.Windows (Package)": {
+	  "commandName": "MsixPackage"
+	},
+	"GeometrySample.Windows (Unpackaged)": {
+	  "commandName": "Project"
+	}
+  }
+}

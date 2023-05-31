@@ -1,0 +1,28 @@
+<Project Sdk="MSBuild.Sdk.Extras/3.0.38">
+	<PropertyGroup>
+		<TargetFrameworks>uap10.0.19041</TargetFrameworks>
+		<RootNamespace>Vssl.Samples.Framework</RootNamespace>
+		<AssemblyName>Vssl.Samples.Framework.UWP</AssemblyName>
+		<CodeAnalysisRuleSet>..\Vssl.ruleset</CodeAnalysisRuleSet>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="Assets\**" />
+		<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+		<Compile Update="**\*.xaml.cs">
+			<DependentUpon>%(Filename)</DependentUpon>
+		</Compile>
+		<PRIResource Include="**\*.resw" />
+	</ItemGroup>
+	<ItemGroup>
+		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Include="..\Framework.Net7\UIDispatcher.cs" Link="UIDispatcher.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\FrameworkInterfaces\FrameworkInterfaces.csproj" />
+	</ItemGroup>
+</Project>

@@ -5,6 +5,7 @@
 *.vspscc
 *.vssscc
 *.USER
+*.cache
 .vs
 bin
 obj
