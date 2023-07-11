@@ -6,6 +6,9 @@ namespace MSExtFacade
     using Microsoft.Extensions.Hosting;
     using Vssl.Samples.FrameworkInterfaces;
 
+    /// <summary>
+    /// A Microsoft Extensions Dependency Injections implementation of the dependency injection resolution interface
+    /// </summary>
     public class MSExtDI : IDependencyResolver
     {
         /// <summary>
@@ -20,6 +23,10 @@ namespace MSExtFacade
         {
         }
 
+        /// <summary>
+        /// Configure the service provider.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider</param>
         public void Configure(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
@@ -30,7 +37,8 @@ namespace MSExtFacade
         /// </summary>
         /// <typeparam name="InterfaceType">The registered interface type</typeparam>
         /// <returns>The mapped type</returns>
-        public InterfaceType Resolve<InterfaceType>() where InterfaceType : class
+        public InterfaceType Resolve<InterfaceType>()
+            where InterfaceType : class
         {
             return this.serviceProvider.GetRequiredService<InterfaceType>();
         }
@@ -48,9 +56,11 @@ namespace MSExtFacade
         /// <summary>
         /// Registers a class and its interface
         /// </summary>
-        /// <typeparam name="T">The type of the interface</typeparam>
-        /// <typeparam name="U">The type of the class</typeparam>
-        public void Register<T, U>() where T : class where U : class, T
+        /// <typeparam name="TF">The type of the interface</typeparam>
+        /// <typeparam name="TI">The type of the class</typeparam>
+        public void Register<TF, TI>()
+            where TF : class
+            where TI : class, TF
         {
             throw new NotImplementedException();
         }
@@ -58,9 +68,11 @@ namespace MSExtFacade
         /// <summary>
         /// Registers a class as a singleton
         /// </summary>
-        /// <typeparam name="T">The type of the interface</typeparam>
-        /// <typeparam name="U">The type of the class</typeparam>
-        public void RegisterSingleton<T, U>() where T : class where U : class, T
+        /// <typeparam name="TF">The type of the interface</typeparam>
+        /// <typeparam name="TI">The type of the class</typeparam>
+        public void RegisterSingleton<TF, TI>()
+            where TF : class
+            where TI : class, TF
         {
             throw new NotImplementedException();
         }
@@ -96,6 +108,5 @@ namespace MSExtFacade
 
             return false;
         }
-
     }
 }

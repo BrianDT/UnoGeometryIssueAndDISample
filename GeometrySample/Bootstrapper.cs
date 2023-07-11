@@ -4,8 +4,9 @@ namespace GeometrySample
 {
     using System;
     using System.Collections.Generic;
+    ////using System.ComponentModel;
     using System.Text;
-#if __DROID__
+#if ANDROID
     using Lamar;
     using LamarDiFacade;
 #elif __WPF__
@@ -14,15 +15,26 @@ namespace GeometrySample
 #elif __IOS__
     using Framework.TinyDIFacade;
 #elif __WASM__
-    using SimpleInjector;
-    using SimInjDIFacade;
-#elif WINDOWS_UWP
-    using DryIoc;
-    using DryIocDIFacade;
-#elif NET7_0
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using MSExtFacade;
+    ////using Autofac;
+    ////using AutoFacDIFacade;
+    ////using SB=Stashbox;
+    ////using StashBoxDIFacade;
+    ////using Castle.MicroKernel.Registration;
+    ////using Castle.Windsor;
+    ////using CastleWindsorDiFacade;
+    ////using SimpleInjector;
+    ////    using SimpleInjector;
+    ////    using SimInjDIFacade;
+#elif WINDOWS_UWP
+    using DryIoc;
+    using DryIocDIFacade;
+#elif WINDOWS && NET7_0
+    using Grace.DependencyInjection;
+    using Grace.DependencyInjection.Lifestyle;
+    using GraceDIFacade;
 #else
     using Unity;
     using Unity.Lifetime;
@@ -52,7 +64,7 @@ namespace GeometrySample
         /// <returns>The interface to the DI facade</returns>
         public IDependencyResolver Startup()
         {
-#if __DROID__
+#if ANDROID
             // DI Facade
             LamarDI diFacade = new LamarDI();
             var registry = new ServiceRegistry();
@@ -68,6 +80,55 @@ namespace GeometrySample
 
             diFacade.Initialise(container);
 #elif __WASM__
+            var services = new ServiceCollection();
+            services.AddSingleton<IDependencyResolver, MSExtDI>()
+                    .AddSingleton<IDispatchOnUIThread, UIDispatcher>()
+                    .AddTransient<IMainViewModel, MainViewModel>();
+
+            var serviceProvider = services.BuildServiceProvider();
+            var diFacade = serviceProvider.GetRequiredService<IDependencyResolver>();
+            ((MSExtDI)diFacade).Configure(serviceProvider);
+
+            /*
+            var builder = new ContainerBuilder();
+            // Configure the container (register)
+            builder.RegisterInstance(new AutoFacDI()).As<IDependencyResolver>();
+            builder.RegisterType<UIDispatcher>().As<IDispatchOnUIThread>().SingleInstance();
+            builder.RegisterType<MainViewModel>().As<IMainViewModel>();
+
+            var container = builder.Build();
+
+            // define a global scope
+            var scope = container.BeginLifetimeScope();
+
+            var diFacade = scope.Resolve<IDependencyResolver>();
+            ((AutoFacDI)diFacade).SetGlobalScope(scope);
+            */
+
+            /*
+            // Create a new Stash Box container
+            var container = new SB.StashboxContainer();
+            IDependencyResolver diFacade = new StashBoxDI(container);
+
+            container.RegisterInstance<IDependencyResolver>(diFacade);
+            container.RegisterSingleton<IDispatchOnUIThread, UIDispatcher>();
+            container.Register<IMainViewModel, MainViewModel>();
+
+            // Verify your configuration
+            container.Validate();
+            */
+            /*
+            // Create a new Castle Windsor container
+            var container = new WindsorContainer();
+
+            // Configure the container (register)
+            container.Register(Component.For<IDependencyResolver>().Instance(new CastleWindsorDi(container)));
+            container.Register(Component.For<IDispatchOnUIThread>().ImplementedBy<UIDispatcher>());
+            container.Register(Component.For<IMainViewModel>().ImplementedBy<MainViewModel>().LifeStyle.Transient);
+
+            var diFacade = container.Resolve<IDependencyResolver>();
+            */
+            /*
             // Create a new Simple Injector container
             var container = new Container();
 
@@ -80,6 +141,7 @@ namespace GeometrySample
             container.Verify();
 
             var diFacade = container.GetInstance<IDependencyResolver>();
+            */
 #elif WINDOWS_UWP
             var container = new Container();
             container.RegisterInstance<IDependencyResolver>(new DryIocDI(container));
@@ -118,15 +180,16 @@ namespace GeometrySample
             });
 
             var diFacade = container.GetInstance<IDependencyResolver>();
-#elif NET7_0
-            var services = new ServiceCollection();
-            services.AddSingleton<IDependencyResolver, MSExtDI>()
-                    .AddSingleton<IDispatchOnUIThread, UIDispatcher>()
-                    .AddTransient<IMainViewModel, MainViewModel>();
+#elif WINDOWS && NET7_0
+            var container = new DependencyInjectionContainer();
+            container.Configure(c =>
+            {
+                c.ExportInstance(new GraceDI(container)).As<IDependencyResolver>();
+                c.Export<UIDispatcher>().As<IDispatchOnUIThread>().Lifestyle.Singleton();
+                c.Export<MainViewModel>().As<IMainViewModel>();
+            });
 
-            var serviceProvider = services.BuildServiceProvider();
-            var diFacade = serviceProvider.GetRequiredService<IDependencyResolver>();
-            ((MSExtDI)diFacade).Configure(serviceProvider);
+            var diFacade = container.Locate<IDependencyResolver>();
 #else
             IUnityContainer container = new UnityContainer();
             container.RegisterInstance<IUnityContainer>(container, new ContainerControlledLifetimeManager());

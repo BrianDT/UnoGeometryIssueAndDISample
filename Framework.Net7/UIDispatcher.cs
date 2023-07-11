@@ -147,8 +147,7 @@ namespace Vssl.Samples.Framework
         /// <param name="action">The action</param>
         public void Execute(Action action)
         {
-            var tcs = new TaskCompletionSource<object>();
-            if (this.dispatcher == null)
+            if (this.dispatcher == null || SynchronizationContext.Current == this.dispatcher)
             {
                 action();
             }
@@ -166,16 +165,30 @@ namespace Vssl.Samples.Framework
         /// <returns>An awaitable task</returns>
         public async Task ExecuteAsync(Action action)
         {
-            if (this.dispatcher == null)
+            if (this.dispatcher == null || SynchronizationContext.Current == this.dispatcher)
             {
                 action();
             }
             else
             {
-                this.dispatcher.Send((object state) => action(), null);
-            }
+                var tcs = new TaskCompletionSource<object>();
+                try
+                {
+                    this.dispatcher.Post(
+                        (object state) =>
+                        {
+                            action();
+                            tcs.TrySetResult(null);
+                        },
+                        null);
+                }
+                catch (Exception ex)
+                {
+                    tcs.TrySetException(ex);
+                }
 
-            await Task.CompletedTask;
+                await tcs.Task.ConfigureAwait(false);
+            }
         }
 #endif
     }

@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.0.4" />
     <PackageReference Include="MSTest.TestFramework" Version="3.0.4" />
     <PackageReference Include="coverlet.collector" Version="6.0.0">
@@ -19,11 +19,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AutoFacDIFacade\AutoFacDIFacade.csproj" />
+    <ProjectReference Include="..\CastleWindsorDiFacade\CastleWindsorDiFacade.csproj" />
     <ProjectReference Include="..\DryIocDIFacade\DryIocDIFacade.csproj" />
     <ProjectReference Include="..\Framework.Helpers\Framework.Helpers.csproj" />
+    <ProjectReference Include="..\GraceDIFacade\GraceDIFacade.csproj" />
     <ProjectReference Include="..\MSExtFacade\MSExtFacade.csproj" />
     <ProjectReference Include="..\SimInjDIFacade\SimInjDIFacade.csproj" />
     <ProjectReference Include="..\SMDIFacade\SMDIFacade.csproj" />
+    <ProjectReference Include="..\StashBoxDIFacade\StashBoxDIFacade.csproj" />
   </ItemGroup>
 
 </Project>

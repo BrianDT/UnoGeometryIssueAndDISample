@@ -1,0 +1,112 @@
+﻿namespace DIUnitTests
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Grace.DependencyInjection;
+    using GraceDIFacade;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Vssl.Samples.FrameworkInterfaces;
+
+    [TestClass]
+    public class UnitTestGraceDI
+    {
+        private Guid testKey;
+
+        private IDependencyResolver diFacade;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            this.testKey = Guid.NewGuid();
+            SampleViewModel.InitCount(this.testKey, typeof(SampleViewModel));
+            SampleService.InitCount(this.testKey, typeof(SampleService));
+
+            var container = new DependencyInjectionContainer();
+            container.Configure(c =>
+            {
+                c.ExportInstance(new GraceDI(container)).As<IDependencyResolver>();
+                c.ExportInstance(new SampleService(this.testKey)).As<ISampleService>();
+                c.Export<SampleService2>().As<ISampleService2>();
+                c.ExportFactory<ISampleViewModel>(() => new SampleViewModel(this.testKey)).As<ISampleViewModel>();
+            });
+
+            this.diFacade = container.Locate<IDependencyResolver>();
+        }
+
+        [TestMethod]
+        public void TestResolve()
+        {
+            int expected = 0;
+            this.TestResolveViewModel(ref expected);
+            this.TestResolveService();
+        }
+
+        [TestMethod]
+        public void TestRegister()
+        {
+            bool threwException = false;
+            try
+            {
+                this.diFacade.RegisterSingleton<ISampleDynamic, SampleDynamic>();
+                var dy1 = this.diFacade.Resolve<ISampleDynamic>();
+            }
+            catch (Exception)
+            {
+                threwException = true;
+            }
+
+            Assert.IsFalse(threwException);
+        }
+
+        [TestMethod]
+        public void TestRegisterSingleton()
+        {
+            bool threwException = false;
+            try
+            {
+                this.diFacade.RegisterSingleton<ISampleSingleton, SampleSingletonService>();
+                var dy1 = this.diFacade.Resolve<ISampleSingleton>();
+                Assert.IsNotNull(dy1);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+                threwException = true;
+            }
+
+            Assert.IsFalse(threwException);
+        }
+
+        [TestMethod]
+        public void TestMapping()
+        {
+            var type = this.diFacade.GetMappedType(typeof(ISampleDynamic));
+            Assert.IsNull(type);
+
+            type = this.diFacade.GetMappedType(typeof(ISampleService));
+            Assert.AreEqual(typeof(SampleService), type);
+        }
+
+        private void TestResolveService()
+        {
+            var s1 = this.diFacade.Resolve(typeof(ISampleService)) as ISampleService;
+            Assert.IsNotNull(s1);
+            Assert.AreEqual(1, s1.Count(this.testKey));
+            var s2 = this.diFacade.Resolve(typeof(ISampleService)) as ISampleService;
+            Assert.IsNotNull(s2);
+            Assert.AreEqual(1, s2.Count(this.testKey));
+        }
+
+        private void TestResolveViewModel(ref int expected)
+        {
+            var vm = this.diFacade.Resolve<ISampleViewModel>();
+            Assert.AreEqual(++expected, vm.Count(this.testKey));
+            var vm2 = this.diFacade.Resolve<ISampleViewModel>();
+            Assert.AreEqual(++expected, vm2.Count(this.testKey));
+        }
+    }
+}
