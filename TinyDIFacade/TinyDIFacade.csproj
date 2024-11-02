@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Framework.TinyDIFacade</RootNamespace>
     <AssemblyName>Framework.TinyDIFacade</AssemblyName>
 	  <Nullable>disable</Nullable>

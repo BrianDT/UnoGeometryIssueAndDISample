@@ -1,7 +1,8 @@
-﻿// <copyright file="MSExtDI.cs" company="Visual Software Systems Ltd.">Copyright (c) 2017, 2019 All rights reserved</copyright>
+// <copyright file="MSExtDI.cs" company="Visual Software Systems Ltd.">Copyright (c) 2017, 2019 All rights reserved</copyright>
 
 namespace MSExtFacade
 {
+    using System;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Vssl.Samples.FrameworkInterfaces;

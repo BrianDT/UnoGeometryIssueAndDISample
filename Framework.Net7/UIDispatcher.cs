@@ -1,4 +1,4 @@
-﻿// <copyright file="UIDispatcher.cs" company="Visual Software Systems Ltd.">Copyright (c) 2013, 2019 All rights reserved</copyright>
+// <copyright file="UIDispatcher.cs" company="Visual Software Systems Ltd.">Copyright (c) 2013, 2019 All rights reserved</copyright>
 
 namespace Vssl.Samples.Framework
 {
@@ -11,7 +11,7 @@ namespace Vssl.Samples.Framework
     using Windows.UI.Core;
 #if WINDOWS_UWP
     using Windows.UI.Xaml;
-#elif !NET7_0 && !NETSTANDARD2_0
+#elif !NET6_0_OR_GREATER && !NETSTANDARD2_0
     using Microsoft.UI.Xaml;
 #endif
 
@@ -20,7 +20,7 @@ namespace Vssl.Samples.Framework
     /// </summary>
     public class UIDispatcher : IDispatchOnUIThread
     {
-#if !NET7_0 && !NETSTANDARD2_0
+#if !NET6_0_OR_GREATER && !NETSTANDARD2_0
         /// <summary>
         /// The UWP platform dispatcher
         /// </summary>
@@ -41,7 +41,7 @@ namespace Vssl.Samples.Framework
         /// </summary>
         public void Initialize()
         {
-#if !NET7_0 && !NETSTANDARD2_0
+#if !NET6_0_OR_GREATER && !NETSTANDARD2_0
             if (Window.Current != null)
             {
                 this.dispatcher = Window.Current.Dispatcher;
@@ -81,7 +81,7 @@ namespace Vssl.Samples.Framework
             await this.ExecuteAsync(action);
         }
 
-#if !NET7_0 && !NETSTANDARD2_0
+#if !NET6_0_OR_GREATER && !NETSTANDARD2_0
         /// <summary>
         /// Execute an action via the dispatcher
         /// </summary>

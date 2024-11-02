@@ -1,4 +1,4 @@
-﻿// <copyright file="StructureMapDI.cs" company="Twisted Fish Ltd. and Visual Software Systems Ltd.">Copyright (c) 2017, 2018, 2019 All rights reserved</copyright>
+// <copyright file="TinyIoCDependencyService.cs" company="Twisted Fish Ltd. and Visual Software Systems Ltd.">Copyright (c) 2017, 2018, 2019 All rights reserved</copyright>
 
 using System;
 using System.Collections.Generic;

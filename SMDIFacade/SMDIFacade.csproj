@@ -1,11 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+      <TargetFramework>net8.0</TargetFramework>
+      <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="StructureMap" Version="4.7.1" />
+    <PackageReference Include="StructureMap" />
   </ItemGroup>
 
   <ItemGroup>

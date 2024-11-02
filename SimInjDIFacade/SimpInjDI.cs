@@ -1,5 +1,6 @@
-﻿namespace SimInjDIFacade
+namespace SimInjDIFacade
 {
+    using System;
     using SimpleInjector;
     using Vssl.Samples.FrameworkInterfaces;
 

@@ -1,7 +1,9 @@
-﻿// <copyright file="AutoFacDI.cs" company="Visual Software Systems Ltd.">Copyright (c) 2022 All rights reserved</copyright>
+// <copyright file="AutoFacDI.cs" company="Visual Software Systems Ltd.">Copyright (c) 2022 All rights reserved</copyright>
 
 namespace AutoFacDIFacade
 {
+    using System;
+    using System.Linq;
     using Autofac;
     using Vssl.Samples.FrameworkInterfaces;
 

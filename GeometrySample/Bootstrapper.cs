@@ -1,4 +1,4 @@
-﻿// <copyright file="Bootstrapper.cs" company="Visual Software Systems Ltd.">Copyright (c) 2019 All rights reserved</copyright>
+// <copyright file="Bootstrapper.cs" company="Visual Software Systems Ltd.">Copyright (c) 2019 All rights reserved</copyright>
 
 namespace GeometrySample
 {
@@ -31,7 +31,7 @@ namespace GeometrySample
 #elif WINDOWS_UWP
     using DryIoc;
     using DryIocDIFacade;
-#elif WINDOWS && NET7_0
+#elif WINDOWS && NET6_0_OR_GREATER
     using Grace.DependencyInjection;
     using Grace.DependencyInjection.Lifestyle;
     using GraceDIFacade;
@@ -180,7 +180,7 @@ namespace GeometrySample
             });
 
             var diFacade = container.GetInstance<IDependencyResolver>();
-#elif WINDOWS && NET7_0
+#elif WINDOWS && NET6_0_OR_GREATER
             var container = new DependencyInjectionContainer();
             container.Configure(c =>
             {

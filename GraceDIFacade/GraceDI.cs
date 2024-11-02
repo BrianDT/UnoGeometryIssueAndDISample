@@ -1,7 +1,9 @@
-﻿// <copyright file="GraceDI.cs" company="Visual Software Systems Ltd.">Copyright (c) 2023 All rights reserved</copyright>
+// <copyright file="GraceDI.cs" company="Visual Software Systems Ltd.">Copyright (c) 2023 All rights reserved</copyright>
 
 namespace GraceDIFacade
 {
+    using System;
+    using System.Linq;
     using Grace.DependencyInjection;
     using Vssl.Samples.FrameworkInterfaces;
 
