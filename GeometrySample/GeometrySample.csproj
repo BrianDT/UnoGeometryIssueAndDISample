@@ -4,8 +4,10 @@
 
     <OutputType>Exe</OutputType>
     <UnoSingleProject>true</UnoSingleProject>
+      <CodeAnalysisRuleSet>..\Vssl.ruleset</CodeAnalysisRuleSet>
+      <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-    <!-- Display name -->
+      <!-- Display name -->
     <ApplicationTitle>GeometrySample</ApplicationTitle>
     <!-- App Identifier -->
     <ApplicationId>com.VSSL.GeometrySample</ApplicationId>
@@ -54,6 +56,8 @@
     <ProjectReference Include="..\GraceDIFacade\GraceDIFacade.csproj" />
     <ProjectReference Include="..\LamarDiFacade\LamarDiFacade.csproj" />
     <ProjectReference Include="..\MSExtFacade\MSExtFacade.csproj" />
+    <ProjectReference Include="..\ServiceInterfaces\ServiceInterfaces.csproj" />
+    <ProjectReference Include="..\Services\Services.csproj" />
     <ProjectReference Include="..\SimInjDIFacade\SimInjDIFacade.csproj" />
     <ProjectReference Include="..\StashBoxDIFacade\StashBoxDIFacade.csproj" />
     <ProjectReference Include="..\TinyDIFacade\TinyDIFacade.csproj" />

@@ -1,4 +1,4 @@
-﻿// <copyright file="MainViewModel.cs" company="Visual Software Systems Ltd.">Copyright (c) 2019 All rights reserved</copyright>
+// <copyright file="MainViewModel.cs" company="Visual Software Systems Ltd.">Copyright (c) 2019 All rights reserved</copyright>
 
 namespace Vssl.Samples.ViewModels
 {
@@ -8,6 +8,7 @@ namespace Vssl.Samples.ViewModels
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using ServiceInterfaces;
     using Vssl.Samples.Framework;
     using Vssl.Samples.FrameworkInterfaces;
     using Vssl.Samples.ViewModelInterfaces;
@@ -55,6 +56,11 @@ namespace Vssl.Samples.ViewModels
         /// </summary>
         private int yInc = 1;
 
+        /// <summary>
+        /// A DI injected singleton service
+        /// </summary>
+        private ISampleService sampleService;
+
         #endregion
 
         #region [ Constructor ]
@@ -62,9 +68,11 @@ namespace Vssl.Samples.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel" /> class.
         /// </summary>
-        public MainViewModel()
+        /// <param name="sampleService">A DI injected singleton service</param>
+        public MainViewModel(ISampleService sampleService)
             : base()
         {
+            this.sampleService = sampleService;
             this.StartCommand = new DelegateCommandAsync(this.StartAnnimating, (p) => true);
             this.StopCommand = new DelegateCommandAsync(this.StopAnnimating, (p) => true);
             this.Height = 150.0D;

@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" >
+    <PackageReference Include="StyleCop.Analyzers">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Framework.Helpers\Framework.Helpers.csproj" />
     <ProjectReference Include="..\Framework.VMUtilities\Framework.VMUtilities.csproj" />
+    <ProjectReference Include="..\ServiceInterfaces\ServiceInterfaces.csproj" />
     <ProjectReference Include="..\ViewModelInterfaces\ViewModelInterfaces.csproj" />
   </ItemGroup>
 

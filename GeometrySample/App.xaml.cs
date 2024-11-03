@@ -1,3 +1,6 @@
+// <copyright file="App.xaml.cs" company="Visual Software Systems Ltd.">Copyright (c) 2024 All rights reserved</copyright>
+namespace GeometrySample;
+
 using System;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
@@ -7,7 +10,9 @@ using Uno.Resizetizer;
 using Uno.UI;
 using Vssl.Samples.FrameworkInterfaces;
 
-namespace GeometrySample;
+/// <summary>
+/// Provides application-specific behavior to supplement the default Application class.
+/// </summary>
 public partial class App : Application
 {
     /// <summary>
@@ -16,6 +21,7 @@ public partial class App : Application
     private IDependencyResolver diFacade;
 
     /// <summary>
+    /// Initializes a new instance of the <see cref="App"/> class.
     /// Initializes the singleton application object. This is the first line of authored code
     /// executed, and as such is the logical equivalent of main() or WinMain().
     /// </summary>
@@ -24,27 +30,35 @@ public partial class App : Application
         this.InitializeComponent();
     }
 
+    /// <summary>
+    /// Gets the main window, makies it available to AppHead.
+    /// </summary>
     protected Window MainWindow { get; private set; }
 
+    /// <summary>
+    /// Invoked when the application is launched normally by the end user.  Other entry points
+    /// will be used such as when the application is launched to open a specific file.
+    /// </summary>
+    /// <param name="args">Details about the launch request and process.</param>
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
-        MainWindow = new Window();
+        this.MainWindow = new Window();
 #if DEBUG
-        MainWindow.EnableHotReload();
+        this.MainWindow.EnableHotReload();
 #endif
         var bootstrapper = new Bootstrapper();
 
         // Do not repeat app initialization when the Window already has content,
         // just ensure that the window is active
-        if (MainWindow.Content is not Frame rootFrame)
+        if (this.MainWindow.Content is not Frame rootFrame)
         {
             // Create a Frame to act as the navigation context and navigate to the first page
             rootFrame = new Frame();
 
             // Place the frame in the current Window
-            MainWindow.Content = rootFrame;
+            this.MainWindow.Content = rootFrame;
 
-            rootFrame.NavigationFailed += OnNavigationFailed;
+            rootFrame.NavigationFailed += this.OnNavigationFailed;
         }
 
         if (rootFrame.Content == null)
@@ -57,9 +71,10 @@ public partial class App : Application
             rootFrame.Navigate(typeof(MainPage), args.Arguments);
         }
 
-        MainWindow.SetWindowIcon();
+        this.MainWindow.SetWindowIcon();
+
         // Ensure the current window is active
-        MainWindow.Activate();
+        this.MainWindow.Activate();
     }
 
     /// <summary>
@@ -67,7 +82,7 @@ public partial class App : Application
     /// </summary>
     /// <param name="sender">The Frame which failed navigation</param>
     /// <param name="e">Details about the navigation failure</param>
-    void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+    private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
     {
         throw new InvalidOperationException($"Failed to load {e.SourcePageType.FullName}: {e.Exception}");
     }
@@ -84,7 +99,6 @@ public partial class App : Application
         // desktop targets, you can use URL or command line parameters to enable it.
         //
         // For more performance documentation: https://platform.uno/docs/articles/Uno-UI-Performance.html
-
         var factory = LoggerFactory.Create(builder =>
         {
 #if __WASM__
