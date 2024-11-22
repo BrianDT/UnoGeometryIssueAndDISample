@@ -2,6 +2,7 @@
 namespace GeometrySample;
 
 using System;
+using GeometrySample.Initialisation;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;

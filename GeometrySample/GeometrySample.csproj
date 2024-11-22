@@ -45,7 +45,11 @@
         </PackageReference>
     </ItemGroup>
 
-  <ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" VersionOverride="9.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
     <ProjectReference Include="..\AutoFacDIFacade\AutoFacDIFacade.csproj" />
     <ProjectReference Include="..\CastleWindsorDiFacade\CastleWindsorDiFacade.csproj" />
     <ProjectReference Include="..\DryIocDIFacade\DryIocDIFacade.csproj" />
@@ -59,6 +63,7 @@
     <ProjectReference Include="..\ServiceInterfaces\ServiceInterfaces.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
     <ProjectReference Include="..\SimInjDIFacade\SimInjDIFacade.csproj" />
+    <ProjectReference Include="..\SMDIFacade\SMDIFacade.csproj" />
     <ProjectReference Include="..\StashBoxDIFacade\StashBoxDIFacade.csproj" />
     <ProjectReference Include="..\TinyDIFacade\TinyDIFacade.csproj" />
     <ProjectReference Include="..\UnityDIFacade\UnityDIFacade.csproj" />
